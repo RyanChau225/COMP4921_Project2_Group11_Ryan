@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post - My Reddit Clone</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+  <%- include('templates/header.ejs') %>
+  <div class="main-content">
+    <section class="section">
+        <div class="container is is-half-desktop">
+            <h1 class="title">Create a New Post</h1>
+            
+            <% if (!authenticated) { %>
+                <p>You need to <a href="/login">log in</a> to create a post.</p>
+            <% } else { %>
+
+                <!-- Form to Create a New Post -->
+                <form action="/addThread" method="POST">
+                    <input type="hidden" name="user_id" value="<%= user_id %>">
+
+                    <div class="field">
+                        <label class="label" for="title">Title:</label>
+                        <div class="control">
+                            <input class="input" type="text" id="title" name="title" placeholder="Enter the post title" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="content">Content:</label>
+                        <div class="control">
+                            <textarea class="textarea" id="content" name="content" placeholder="Enter the content of the post" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <button type="submit" class="button is-primary">Post</button>
+                        </div>
+                    </div>
+                </form>
+
+            <% } %>
+        </div>
+    </section>
+  </div>
+    <%- include('templates/footer.ejs') %>
+</body>
+</html>

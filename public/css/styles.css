@@ -1,0 +1,84 @@
+body {
+  display: flex;
+  padding-top: 6rem;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: url('codioful-formerly-gradienta-LeG68PrXA6Y-unsplash.jpg');
+  background-repeat: no-repeat;
+  /* This will prevent the image from repeating in case it's too small for the container */
+  background-size: cover;
+  /* This will make the image cover the entire viewport */
+  background-position: center center;
+  /* This will center the image in the viewport */
+  background-attachment: fixed;
+  /* This ensures the image remains fixed while scrolling */
+
+  
+}
+
+.heart-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5em;
+  color: grey;
+}
+
+.heart-button.liked {
+  color: red;
+}
+
+/* This will ensure the heart icon is centered inside the button */
+.heart-button i {
+  pointer-events: none;
+}
+
+
+.is-opaque {
+  background-color: rgba(200, 200, 200, 0.2); /* White with 70% opacity */
+}
+
+
+.navbar {
+  transition: opacity 0.5s ease; /* Smooth transition for showing/hiding the header */
+}
+
+
+.main-content {
+  flex: 1;
+
+}
+
+.reduced-padding {
+  padding: 1rem;
+}
+
+#searchBox {
+  border: none;           /* Remove default borders */
+  outline: none;          /* Remove focus outline */
+  padding: 10px 5px;      /* Add some padding */
+  width: 95%;          
+  /* width: 735px; */
+  transition: border-bottom-color 0.3s; /* Add transition */
+  background-color: rgba(255, 255, 255, 0.5);  /* white with 50% opacity */
+    transition: background-color 0.4s ease;  /* Smooth transition for the background color */
+    border: none;
+    outline: none;
+}
+
+/* Change the color of the bottom border on focus */
+#searchBox:focus {
+  background-color: rgba(255, 255, 255);
+}
+
+#btnAddLink, #btnAddImage, #btnAddText {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;        /* White border */
+  color: rgb(0, 0, 0);                   /* White text color */
+  transition: background-color 0.4s ease;  /* Smooth transition for the background color */
+}
+
+#btnAddLink:hover, #btnAddImage:hover, #btnAddText:hover {
+  background-color: rgba(255, 255, 255, 0.9);       /* White background on hover */
+  color: black;                  /* Black text color on hover */
+}

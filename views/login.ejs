@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+
+    <!-- Links -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <!-- End of Links -->
+</head>
+
+<body>
+    <!-- Sticky Header -->
+    <%- include("templates/header") %>
+    <!-- End of Header -->
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <section class="section">
+            <div class="container has-text-centered">
+                <h1 class="title is-1">
+                    Welcome to!
+                </h1>
+                <p class="subtitle is-3">
+                    Ryan's <strong>Reddit</strong>!
+                </p>
+            </div>
+        </section>
+        <section class="section is-flex is-vcentered">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-3">
+                        <!-- Point the form's action to the back-end login route -->
+                        <form class="box" action="/login" method="post">
+                            <div class="field">
+                                <label class="label">Email</label>
+                                <div class="control has-icons-left">
+                                    <!-- Name attribute is important for back-end to retrieve the value -->
+                                    <input class="input" type="email" name="email" placeholder="JohnDoe123@example.com">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Password</label>
+                                <div class="control has-icons-left">
+                                    <!-- Name attribute is important for back-end to retrieve the value -->
+                                    <input class="input" name="password" type="password" placeholder="********">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="buttons is-centered">
+                                    <button class="button is-primary is-fullwidth" type="submit">Sign in</button>
+                                    <!-- Point to sign-up route if you have one -->
+                                    <a href="/signup" class="button is-primary is-fullwidth">Create an Account</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Sticky Footer -->
+    <%- include("templates/footer") %>
+    <!-- End of Footer -->
+</body>
+
+</html>
+<script src="../js/loadContent.js"></script>

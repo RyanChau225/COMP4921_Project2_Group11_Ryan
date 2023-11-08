@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Reddit Clone</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+  <%- include('templates/header.ejs') %>
+  <div class="main-content">
+    <section class="section">
+        <div class="container is-half-desktop">
+            <h1 class="title">Welcome to My Reddit Clone</h1>
+            
+            <% if (threads.length === 0) { %>
+                <p>There are no current threads.</p>
+            <% } else { %>
+                <!-- List of Threads -->
+                <div class="content">
+                  <% threads.forEach(thread => { %>
+                    <div class="message">
+                      <div class="message-header">
+                        <p><a href="/post-detail/<%= thread._id %>"><%= thread.title %></a></p>
+                      </div>
+                      <div class="message-body">
+                        <%= thread.content.substring(0, 100) %>...<br>
+                        <small>Posted by: <%= thread.author %></small>
+                      </div>
+                      <!-- Likes and Like Button Centered -->
+                      <div class="is-flex is-justify-content-center">
+                        <span>Likes: <span id="like-count-<%= thread._id %>"><%= thread.likesCount %></span></span>
+                        <% if (user_id) { %>
+                          <button class="heart-button <%= thread.hasLiked ? 'liked' : '' %>" data-thread-id="<%= thread._id %>" onclick="toggleLike('<%= thread._id %>', '<%= user_id %>')">
+                            <i class="fas fa-heart"></i>
+                          </button>
+                        <% } else { %>
+                          <button class="heart-button" onclick="alert('Please log in to like this thread.');">
+                            <i class="fas fa-heart"></i>
+                          </button>
+                        <% } %>
+                      </div>
+                    </div>
+                    
+                  
+                  <% }); %>
+                  
+                
+                </div>
+            <% } %>
+            
+            <!-- Link to create a new post -->
+            <a class="button is-primary" href="/create-post">Create a New Post</a>
+        </div>
+    </section>
+  </div>
+    <%- include('templates/footer.ejs') %>
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

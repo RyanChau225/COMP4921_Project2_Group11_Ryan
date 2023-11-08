@@ -1,0 +1,32 @@
+<div class="comment" id="comment-<%= comment._id %>">
+  <div class="content">
+    <%= comment.content %>
+    <br>
+    <small>Posted by: <%= comment.author %></small>
+    <% if (post.user_id) { %>
+      <!-- Reply Button -->
+      <button class="button" onclick="showReplyForm('<%= comment._id %>')">Reply</button>
+    <% } %>
+  </div>
+  <% if (post.user_id) { %>
+    <!-- Hidden Reply Form -->
+    <div id="reply-form-<%= comment._id %>" style="display:none;">
+      <form action="/submit-comment/<%= post.id %>" method="post">
+        <input type="hidden" name="user_id" value="<%= post.user_id %>">
+        <input type="hidden" name="thread_id" value="<%= post.id %>">
+        <input type="hidden" name="parent_comment_id" value="<%= comment._id %>">
+        <textarea name="comment" placeholder="Write your reply..." required></textarea>
+        <button type="submit">Submit Reply</button>
+      </form>
+    </div>
+  <% } %>
+  <!-- Recursively include this partial for child comments -->
+  <% if (comment.children && comment.children.length) { %>
+    <div class="nested-comments">
+      <% comment.children.forEach(function(childComment) { %>
+        <!-- Recursive include for child comments -->
+        <%- include('_comment', { comment: childComment, post: post }) %>
+      <% }); %>
+    </div>
+  <% } %>
+</div>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <!-- Links -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <!-- End of Links -->
+</head>
+<body>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <section class="section">
+        <div class="container has-text-centered">
+          <h1 class="title is-1">
+            Welcome to!
+          </h1>
+          <p class="subtitle is-3">
+            Ryan's <strong>Reddit</strong>!
+          </p>
+          <h1 class="title is-2 mb-0">
+            Sign up Today
+          </h1>
+        </div>
+      </section>
+      <section class="section is-flex is-vcentered">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-3">
+                    <!-- Point the form's action to the back-end signup route -->
+                    <form class="box" action="addUser" method="post">
+
+                      <div class="field">
+                        <label class="label" for="display_name">Display Name:</label>
+                        <div class="control">
+                            <input class="input" type="text" id="display_name" name="display_name" placeholder="Enter your desired display name" required>
+                        </div>
+                    </div>
+                    
+
+                        <!-- First Name Field -->
+                        <div class="field">
+                            <label class="label">First Name</label>
+                            <div class="control has-icons-left">
+                                <!-- Name attribute is important for back-end to retrieve the value -->
+                                <input class="input" type="text" name="first_name" placeholder="John">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-user"></i>
+                                </span>
+                            </div>
+                        </div>
+    
+                        <!-- Last Name Field -->
+                        <div class="field">
+                            <label class="label">Last Name</label>
+                            <div class="control has-icons-left">
+                                <input class="input" type="text" name="last_name" placeholder="Doe">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-user"></i>
+                                </span>
+                            </div>
+                        </div>
+    
+                        <!-- Email Field -->
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control has-icons-left">
+                                <input class="input" type="email" name="email" placeholder="JohnDoe123@example.com">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+    
+                        <!-- Password Field -->
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control has-icons-left">
+                                <input class="input" type="password" name="password" placeholder="********">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-lock"></i>
+                                </span>
+                            </div>
+                        </div>
+    
+                        <div class="field has-text-centered">
+                            <button class="button is-primary is-fullwidth" type="submit">Create an Account</button>
+                        </div>
+                    </form>
+                                        <!-- Link to Login page -->
+                                        <div class="has-text-centered mt-4">
+                                          <a href="/login" class="button">Already have an account?</a>
+                                      </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Sticky Footer -->
+    <%- include("templates/footer") %>
+    <!-- End of Footer -->
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          // Add an event listener for page load
+          window.addEventListener('pageshow', function (event) {
+              var form = document.getElementById('signup-form');
+              if (form) {
+                  // Reset the form fields
+                  form.reset();
+              }
+          });
+      });
+  </script>
+</body>
+</html>
+<script src="/js/loadContent.js"></script>

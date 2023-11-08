@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Detail - My Reddit Clone</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+  <%- include('templates/header.ejs') %>
+  <div class="main-content" >
+  <section class="section">
+    <div class="container">
+      <!-- Use Bulma Columns -->
+      <div class="columns">
+        <!-- Adjust Column Widths -->
+        <div class="column">
+          <!-- Post Details -->
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title"><%= post.title %></p>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <%= post.content %>
+                <br>
+                <small>Posted by: <%= post.author %></small>
+              </div>
+            </div>
+
+            <footer class="card-footer">
+              <!-- Like Button Section -->
+              <div class="card-footer-item">
+                <span>Likes: <span id="like-count-<%= post.id %>"><%= post.likesCount %></span></span>
+              
+                <% if (post.user_id) { %>
+                  <!-- If user is logged in show like button -->
+                  <button class="heart-button <%= post.hasLiked ? 'liked' : '' %>" data-post-id="<%= post.id %>" onclick="toggleLike('<%= post.id %>', '<%= post.user_id %>')">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                <% } else { %>
+                  <!-- If user is not logged in, show a disabled button -->
+                  <button class="heart-button" onclick="alert('You must log in to like posts.');">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                <% } %>
+                
+              </div>
+            </footer>
+            
+            
+          </div>
+        </div>
+        <!-- Add another column if needed -->
+      </div>
+
+      <h2 class="title is-4 mt-5">Comments:</h2>
+      <div class="comments-container">
+        <% post.comments.forEach(function(comment) { %>
+          <div class="comment" id="comment-<%= comment._id %>">
+            <article class="message is-info">
+              <div class="message-body">
+                <%= comment.content %>
+                <br>
+                <small>Posted by: <%= comment.author %></small>
+                <% if (post.user_id) { %>
+                  <button class="button is-small is-link reply-button" onclick="showReplyForm('<%= comment._id %>')">Reply</button>
+                <% } %>
+              </div>
+            </article>
+            <% if (post.user_id) { %>
+              <div class="reply-form" id="reply-form-<%= comment._id %>" style="display:none;">
+                <form action="/submit-comment/<%= post.id %>" method="post">
+                  <input type="hidden" name="user_id" value="<%= post.user_id %>">
+                  <input type="hidden" name="thread_id" value="<%= post.id %>">
+                  <input type="hidden" name="parent_comment_id" value="<%= comment._id %>">
+                  <textarea class="textarea" name="comment" placeholder="Write your reply..." required></textarea>
+                  <div class="field">
+                    <div class="control">
+                      <button class="button is-primary" type="submit">Submit Reply</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            <% } %>
+            <% if (comment.children && comment.children.length) { %>
+              <div class="comment-replies">
+                <% comment.children.forEach(function(childComment) { %>
+                  <%- include('_comment', { comment: childComment, user_id: post.user_id, post: post }) %>
+                <% }); %>
+              </div>
+            <% } %>
+          </div>
+        <% }); %>
+      </div>
+      
+
+
+<!-- Form to Add a Comment -->
+<h2 class="title is-4 mt-5">Add a Comment:</h2>
+<form action="/submit-comment/<%= post.id %>" method="post">
+  <!-- Hidden fields -->
+  <% if (post.user_id) { %>
+    <input type="hidden" name="user_id" value="<%= post.user_id %>">
+  <% } %>
+  <input type="hidden" name="thread_id" value="<%= post.id %>">
+  <div class="field">
+    <div class="control">
+      <textarea class="textarea" name="comment" placeholder="Your comment..." required></textarea>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <button class="button is-primary" type="submit">Comment</button>
+    </div>
+  </div>
+</form>
+
+
+
+
+    </div>
+
+  </section>
+
+  </div>
+  <%- include('templates/footer.ejs') %>
+  <script src="../js/script.js"></script>
+</body>
+</html>
