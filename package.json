@@ -14,6 +14,7 @@
     "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.0",
     "connect-mongodb-session": "^3.1.1",
+    "dotenv": "^16.3.1",
     "express-mongo-sanitize": "^2.2.0",
     "express-session": "^1.17.3",
     "joi-password-complexity": "^5.2.0",
