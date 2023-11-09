@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+    <%- include('templates/header.ejs') %>
+    <div class="main-content">
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-half">
+                    <div class="box">
+                        <h1 class="title">Your Profile</h1>
+                        <form>
+                            <!-- Profile Picture Display -->
+  <div class="field">
+    <label class="label">Profile Picture</label>
+    <figure class="image is-128x128">
+      <img class="is-rounded" src="<%= profilePicUrl %>" alt="Profile Picture">
+    </figure>
+  </div>
+                          <form action="/updateProfilePic" method="post" enctype="multipart/form-data">
+  <div class="field">
+    <label class="label">Update Profile Picture</label>
+    <div class="file has-name">
+      <label class="file-label">
+        <input class="file-input" type="file" name="profile_pic" accept="image/*">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Choose a file…
+          </span>
+        </span>
+        <span class="file-name">
+          No file uploaded
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <button class="button is-link" type="submit">Upload</button>
+    </div>
+  </div>
+</form>
+                          
+                            <div class="field">
+                                <label class="label">Email</label>
+                                <div class="control has-icons-left">
+                                    <input class="input" type="email" placeholder="Email" value="<%= email %>" readonly>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Name</label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Name" value="<%= name %>" readonly>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Display Name</label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Display Name" value="<%= display_name %>" readonly>
+                                </div>
+                            </div>
+                            <!-- Additional fields can be added here -->
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <button class="button is-link" onclick="alert('Edit functionality not implemented.'); return false;">Edit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+
+    <%- include('templates/footer.ejs') %>
+    <script src="../js/script.js"></script>
+</body>
+</html>

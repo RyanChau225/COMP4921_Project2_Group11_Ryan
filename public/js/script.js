@@ -71,6 +71,44 @@ function showReplyForm(commentId) {
   }
 }
 
+function toggleCommentLike(commentId, userId) {
+  // Make sure this function is only called for logged-in users
+  if (!userId) {
+    alert('Please log in to like comments.');
+    return;
+  }
+
+  // Make an AJAX request to the server
+  $.post('/toggle-comment-like', { commentId: commentId, userId: userId }, function(data) {
+    if (data.success) {
+      // Toggle the class on the like button for visual feedback
+      const likeButton = $(`#like-button-${commentId}`);
+      likeButton.toggleClass('liked', data.hasLiked);
+
+      // Update the likes count
+      const likesCountElement = $(`#comment-like-count-${commentId}`);
+      let likesCount = parseInt(likesCountElement.text());
+      likesCount = data.hasLiked ? likesCount + 1 : likesCount - 1;
+      likesCountElement.text(likesCount);
+    } else {
+      // Handle error or guide user to login if not logged in
+      alert(data.message);
+    }
+  }).fail(function() {
+    alert('Please log in to like comments.');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const fileInput = document.querySelector('.file-input');
+  const fileInputName = document.querySelector('.file-name');
+
+  fileInput.addEventListener('change', (event) => {
+    const fileName = event.target.files.length > 0 ? event.target.files[0].name : 'No file uploaded';
+    fileInputName.textContent = fileName;
+  });
+});
+
 
 
 function toggleLike(threadId, userId) {

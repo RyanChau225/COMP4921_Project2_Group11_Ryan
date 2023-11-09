@@ -162,3 +162,29 @@ function searchFunction() {
       }
   });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Add an event listener for page load
+  window.addEventListener('pageshow', function (event) {
+      var form = document.getElementById('signup-form');
+      if (form) {
+          // Reset the form fields
+          form.reset();
+      }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+// Get the file input and file name elements
+const fileInput = document.getElementById('profile_pic');
+const fileInputName = document.querySelector('.file-name');
+
+// Listen for changes on the file input
+fileInput.addEventListener('change', (event) => {
+// Get the file name
+const fileName = event.target.files.length > 0 ? event.target.files[0].name : 'No file uploaded';
+
+// Update the file-name element
+fileInputName.textContent = fileName;
+});
+});

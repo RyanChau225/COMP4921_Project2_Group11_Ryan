@@ -24,6 +24,16 @@ body {
   color: grey;
 }
 
+.comment {
+  margin-bottom: 1em; /* Adjust as needed for desired spacing */
+}
+
+.comment .message-body {
+  word-wrap: break-word; /* Breaks long words to prevent overflow */
+  overflow-wrap: break-word; /* Ensures overflow text is wrapped */
+  overflow-x: auto; /* Adds a scrollbar if content overflows horizontally */
+}
+
 .heart-button.liked {
   color: red;
 }
@@ -31,6 +41,27 @@ body {
 /* This will ensure the heart icon is centered inside the button */
 .heart-button i {
   pointer-events: none;
+}
+
+.like-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: grey;
+}
+
+.like-button.liked {
+  color: red;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.7), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.7);
+  }
+  to {
+    text-shadow: 0 0 15px rgba(255, 0, 0, 0.9), 0 0 25px rgba(255, 0, 0, 0.9), 0 0 35px rgba(255, 0, 0, 0.9);
+  }
 }
 
 

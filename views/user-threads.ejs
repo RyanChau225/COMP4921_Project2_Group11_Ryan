@@ -2,20 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Threads - My Reddit Clone</title>
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Create Post - My Reddit Clone</title>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-      <link rel="stylesheet" type="text/css" href="../css/styles.css">
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  </head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
-  <%- include('templates/header.ejs') %>
+  <div class="main-content">
+    <%- include('templates/header.ejs') %>
     <h1>Your Threads</h1>
     
     <% if (threads.length === 0) { %>
@@ -26,13 +23,16 @@
                 <li>
                     <h2><%= thread.title %></h2>
                     <p><%= thread.content %></p>
-                    <p>Likes: <%= thread.likes %>, Views: <%= thread.views %></p>
-                    <a href="/edit-thread/<%= thread._id %>">Edit</a>
-                    <a href="/delete-thread/<%= thread._id %>">Delete</a>
+                    <p>Likes: <%= thread.likesCount %>, Views: <%= thread.views %></p>
+                    <!-- Add a delete button with a link to delete the thread -->
+                    <form action="/delete-thread/<%= thread._id %>" method="POST">
+                        <button type="submit" class="button is-danger">Delete</button>
+                    </form>
                 </li>
             <% }) %>
         </ul>
     <% } %>
+  </div>
     <%- include('templates/footer.ejs') %>
 </body>
 </html>

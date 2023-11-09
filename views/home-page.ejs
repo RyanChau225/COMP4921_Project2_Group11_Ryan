@@ -29,7 +29,8 @@
                       </div>
                       <div class="message-body">
                         <%= thread.content.substring(0, 100) %>...<br>
-                        <small>Posted by: <%= thread.author %></small>
+                        <small>Posted by: <%= thread.author %></small><br>
+                        <small>Views: <%= thread.views %></small> <!-- Add this line for views -->
                       </div>
                       <!-- Likes and Like Button Centered -->
                       <div class="is-flex is-justify-content-center">
@@ -45,16 +46,15 @@
                         <% } %>
                       </div>
                     </div>
-                    
-                  
                   <% }); %>
+                  
                   
                 
                 </div>
             <% } %>
             
             <!-- Link to create a new post -->
-            <a class="button is-primary" href="/create-post">Create a New Post</a>
+            <a class="button is-light" href="/create-post">Create a New Post</a>
         </div>
     </section>
   </div>

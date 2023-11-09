@@ -66,12 +66,37 @@
               <div class="message-body">
                 <%= comment.content %>
                 <br>
-                <small>Posted by: <%= comment.author %></small>
-                <% if (post.user_id) { %>
-                  <button class="button is-small is-link reply-button" onclick="showReplyForm('<%= comment._id %>')">Reply</button>
-                <% } %>
+                <!-- Bold and black "Posted by" text -->
+                <strong style="color: black;">Posted by:</strong> <%= comment.author %>
+                <br>
+                <!-- Displaying the created date -->
+                <small>Posted on: <%= new Date(comment.created_at).toLocaleDateString() %> at <%= new Date(comment.created_at).toLocaleTimeString() %></small>
+                <!-- Like button and count for comments -->
+                <div class="like-container">
+                  <!-- Conditional rendering based on user_id -->
+                  <% if (user_id) { %>
+                    <!-- Interactive like button for logged-in users -->
+                    <button class="like-button <%= comment.hasLiked ? 'liked' : '' %>" id="like-button-<%= comment._id %>" onclick="toggleCommentLike('<%= comment._id %>', '<%= user_id %>');">
+                      <span class="icon is-small">
+                        <i class="fas fa-heart"></i>
+                      </span>
+                      <span>Like</span>
+                    </button>
+                  <% } else { %>
+                    <!-- Static like button for guests -->
+                    <button class="like-button" onclick="alert('Please log in to like comments.');">
+                      <span class="icon is-small">
+                        <i class="fas fa-heart "></i>
+                      </span>
+                      <span>Like</span>
+                    </button>
+                  <% } %>
+                  <!-- Display the number of likes -->
+                  <span id="comment-like-count-<%= comment._id %>"><%= comment.likesCount %></span> Likes
+                </div>
               </div>
             </article>
+            
             <% if (post.user_id) { %>
               <div class="reply-form" id="reply-form-<%= comment._id %>" style="display:none;">
                 <form action="/submit-comment/<%= post.id %>" method="post">
